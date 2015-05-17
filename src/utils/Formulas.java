@@ -21,7 +21,8 @@ public final class Formulas {
 	
 	public static Double intervalProbability(Integer all, Integer healthyCount) {
 		if(all <= 0 || healthyCount < 0 || all - healthyCount < 0) {
-			throw new IllegalArgumentException("Bad arguments!");
+			Logger.warning("Bad arguments! all = " + all + " healthy = " + healthyCount);
+			return 0.0;
 		}
 
 		return -(logProbabilityDouble(all - healthyCount, all) +
@@ -39,7 +40,7 @@ public final class Formulas {
 	
 	
 	public static Double H(List<Integer> allInterval, List<Integer> healthyInterval) {
-		double sum = 0.0;		
+		double sum = 0.0;
 		for (Integer healthyPeopleInInerval : healthyInterval) {
 			for(Integer allPeopleInInterval : allInterval) {
 				sum += intervalProbability(allPeopleInInterval, healthyPeopleInInerval);
@@ -48,8 +49,8 @@ public final class Formulas {
 		return -1*sum;
 	}
 	
-	public static Double I(List<Integer> x, List<Integer> y) {
-		return H(x) + Constants.H_Y - H(x,y);
+	public static Double I(List<Integer> all, List<Integer> healthy) {
+		return H(all) + Constants.H_Y - H(all,healthy);
 	}
 	
 	public static Double V(List<Integer> x, List<Integer> y) {
