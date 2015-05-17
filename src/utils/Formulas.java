@@ -53,7 +53,23 @@ public final class Formulas {
 		return H(all) + Constants.H_Y - H(all,healthy);
 	}
 	
+	/**
+	 * По ходу неправильно
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public static Double V(List<Integer> x, List<Integer> y) {
 		return (1/x.size())*I(x,y);
+	}
+	
+	public static Double V(List<Double> iCalculated) {
+		Double sum = 0.0;
+		
+		for(Double i : iCalculated) {
+			sum += i;					
+		}
+		
+		return sum/iCalculated.size();
 	}
 }

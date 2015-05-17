@@ -11,18 +11,18 @@ import utils.Formulas;
 import utils.Logger;
 
 public class CalculateI {
+	public static final String PATH = "./data_sets/minitest.csv";
+	
 	public static void main(String[] args) {
-		ParsedData parsed = ParsedData.valueOf(Paths.get("./data_sets/minitest.csv"));
-		System.out.println(parsed.getAllInFile());
-		System.out.println(parsed.getHealthyInFile());
-		
-		System.out.println("=================RESULT==================");
-		List<Double> iValues = CalculateI.calculateI(parsed);
-		System.out.println(iValues);
+		Logger.info("=================RESULT==================");
+		List<Double> iValues = CalculateI.calculateI(Paths.get(PATH));
+		Logger.info("Count of results = " + iValues.size());
+		Logger.info(iValues.toString());
 		
 	}
 	
-	public static List<Double> calculateI(ParsedData dataFromFile) {
+	public static List<Double> calculateI(Path pathToFile) {
+		ParsedData dataFromFile = ParsedData.valueOf(pathToFile);
 		int dataSize = dataFromFile.getAllInFile().size();
 		List<Double> iValues = new ArrayList<>(dataSize);
 		
