@@ -1,17 +1,15 @@
 package weka_file_gen;
 
-import java.io.FileOutputStream;
+import java.io.File;
 import java.nio.file.Paths;
-import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
 
 import utils.Parser;
 import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.converters.ArffSaver;
 
 
 public class Small {
@@ -34,7 +32,12 @@ public class Small {
 		attributes.addElement(new Attribute("Shimmer:DDA"));
 		attributes.addElement(new Attribute("NHR"));
 		attributes.addElement(new Attribute("HNR"));
-		attributes.addElement(new Attribute("status"));
+		
+		FastVector classValues = new FastVector(2);
+		classValues.addElement("0");
+		classValues.addElement("1");
+		attributes.addElement(new Attribute("class", classValues));
+		
 		attributes.addElement(new Attribute("RPDE"));
 		attributes.addElement(new Attribute("DFA"));
 		attributes.addElement(new Attribute("spread1"));
@@ -44,7 +47,7 @@ public class Small {
 		Instances data = new Instances("small", attributes, 0);
 		
 		List<ParkinsonSmallHolder> doubles = Parser.parseSmall(
-				Paths.get("C:\\Users\\Юля\\Desktop\\Study hard\\Кафедра\\parkinsons_small.data").toFile()
+				Paths.get("./data_sets/parkinsons_small.data").toFile()
 				);
 		
 		for(ParkinsonSmallHolder holder : doubles) {
@@ -54,9 +57,16 @@ public class Small {
 			data.add(new Instance(1.0, result));
 		}
 		
+		File targetFile = Paths.get("./small.arff").toFile();
+		if (targetFile.exists()) {
+			targetFile.delete();
+		}
 		
-		
-		IOUtils.write(data.toString(), new FileOutputStream(Paths.get("C:\\Users\\Юля\\Desktop\\Study hard\\Кафедра\\small.arff").toFile()));
+		ArffSaver saver = new ArffSaver();
+		saver.setInstances(data);
+		saver.setFile(targetFile);
+		//saver.setDestination(targetFile);
+		saver.writeBatch();
 		System.out.println("Creation successfull!");
 	}
 
