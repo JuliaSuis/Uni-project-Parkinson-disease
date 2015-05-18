@@ -30,6 +30,7 @@ public class GeneticAlg {
 	public static final String RESULT_10_FALSE_CSV = "./result_10_false.csv";
 	public static final String RESULT_16_TRUE_CSV = "./result_16_true.csv";
 	public static final String RESULT_16_FALSE_CSV = "./result_16_false.csv";
+	public static final int GENERATIONS_COUNT = 500;
 	
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
@@ -363,7 +364,7 @@ public class GeneticAlg {
 			private int i;
 			@Override
 			public boolean isReproductionNeeded() {
-				return i++ < 5000;
+				return i++ < GENERATIONS_COUNT;
 			}			
 		}
 
