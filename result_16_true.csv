@@ -1,2 +1,2 @@
-new worst in population at position = 66 with fitness = 23.32601175796281 with characteristics = [DFA, Jitter:DDP, Shimmer:DDA, Shimmer:APQ3, DFA, DFA, DFA, DFA, MDVP:Flo(Hz), spread1, DFA, MDVP:Fo(Hz), DFA, DFA, DFA, DFA]
-new best in population at position = 91 with fitness = 29.760300558957958 with characteristics = [DFA, DFA, DFA, DFA, DFA, DFA, MDVP:Fo(Hz), DFA, MDVP:Flo(Hz), DFA, DFA, DFA, DFA, DFA, DFA, DFA]
+new worst in population at position = 120 with fitness = 9.159628311412686 with characteristics = [MDVP:Fhi(Hz), spread2, MDVP:Jitter(%), Shimmer:DDA, HNR, MDVP:Shimmer(dB), RPDE, DFA, MDVP:Flo(Hz), MDVP:Shimmer(dB), MDVP:APQ, MDVP:Fo(Hz), spread1, Shimmer:APQ5, Jitter:DDP, D2]
+new best in population at position = 185 with fitness = 16.119458512227105 with characteristics = [MDVP:Fhi(Hz), spread2, spread1, DFA, spread1, spread1, RPDE, DFA, MDVP:RAP,MDVP:PPQ, Shimmer:DDA, DFA, D2, D2, D2, spread2, D2]
