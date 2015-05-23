@@ -50,7 +50,7 @@ public class GeneticAlg {
 		Logger.info("Count of results = " + calculatedV.size());
 		//Logger.info(calculatedV.toString());
 		
-		Logger.info("====================REPRODUCTING POPULATION===================");
+		Logger.info("====================REPRODUCING POPULATION===================");
 		Matrix reproducted10WithMutation = reproductPopulationFirstWay(oldGeneration, true);
 		Matrix reproducted10WithoutMutation = reproductPopulationFirstWay(oldGeneration, false);
 		savePopulationEdges(reproducted10WithMutation, Paths.get(RESULT_10_TRUE_CSV));
@@ -111,14 +111,13 @@ public class GeneticAlg {
 		}
 		return maxPosition;
 	}
-	
+
 	public static Matrix reproductPopulationFirstWay(Matrix inputPopulation, boolean isWithMutation){
 		Matrix outputPopulation = new Matrix(inputPopulation);
 		List<Double> fitnessVals;
 		int generation = 0;
 		CSVPopulationParameters populationParams = new CSVPopulationParameters(inputPopulation, outputPopulation);
 		while(outputPopulation.getCriteria().isReproductionNeeded()) {
-			
 			fitnessVals = outputPopulation.calculateV();
 			int minPosition = findMinPosition(fitnessVals);
 			
@@ -297,11 +296,11 @@ public class GeneticAlg {
 		}
 		
 		public List<Double> calculateV(){
+			Logger.info("size = " + getRowsCount());
 			List<Double> calculatedV = new ArrayList<>(getRowsCount());		
 			for(int i = 0; i < getRowsCount(); i++) {
 				calculatedV.add(Formulas.V(getRowValues(i)));
 			}
-			
 			return calculatedV;
 		}
 		

@@ -1,2 +1,0 @@
-new worst in population at position = 120 with fitness = 9.159628311412686 with characteristics = [MDVP:Fhi(Hz), spread2, MDVP:Jitter(%), Shimmer:DDA, HNR, MDVP:Shimmer(dB), RPDE, DFA, MDVP:Flo(Hz), MDVP:Shimmer(dB), MDVP:APQ, MDVP:Fo(Hz), spread1, Shimmer:APQ5, Jitter:DDP, D2]
-new best in population at position = 185 with fitness = 16.119458512227105 with characteristics = [MDVP:Fhi(Hz), spread2, spread1, DFA, spread1, spread1, RPDE, DFA, MDVP:RAP,MDVP:PPQ, Shimmer:DDA, DFA, D2, D2, D2, spread2, D2]

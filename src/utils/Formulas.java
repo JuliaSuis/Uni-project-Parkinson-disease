@@ -6,59 +6,85 @@ import java.util.List;
 public final class Formulas {
 	private Formulas(){}
 	
-	public static Double logProbabilityDouble(Integer elementary, Integer all) {
-		double probability;
-		if(all == 0 || elementary == 0) {
-			Logger.warning(MessageFormat.format("logProbabilityDouble({0}, {1}) => 0", all, elementary));
-			probability = 0.0;
-		} else {
-			double p = elementary.doubleValue()/all.doubleValue();
-			probability = Math.log(p)*p;
+	private static Double elementaryProbability(Integer numerator, Integer denumerator) {
+		if(numerator < 0 || denumerator < 1) {
+			throw new RuntimeException(MessageFormat.format("Bad arguments: elementaryProbability({0}, {1})", numerator, denumerator));
 		}
-		
-		return probability;
+		return numerator.doubleValue()/denumerator.doubleValue();
 	}
 	
-	public static Double intervalProbability(Integer all, Integer healthyCount) {
-		if(all <= 0 || healthyCount < 0 || all - healthyCount < 0) {
-			Logger.warning("Bad arguments! all = " + all + " healthy = " + healthyCount);
+	public static Double elementaryLogProbability(Integer numerator, Integer denumerator){
+		Double probability = elementaryProbability(numerator, denumerator);
+		
+		if(probability == 0.0){
 			return 0.0;
 		}
-
-		return -(logProbabilityDouble(all - healthyCount, all) +
-				logProbabilityDouble(healthyCount, all));
+		
+		return Math.log(probability)*probability;
 	}
 	
-	public static Double H(List<Integer> input) {
-		double sum = 0.0;
-		for(Integer peopleCountInInterval : input) {
-			sum += intervalProbability(Constants.ALL_SUBJECTS_COUNT, peopleCountInInterval);;
+	public static Double elementaryXProbability(Integer elementary){
+		return elementaryProbability(elementary, Constants.ALL_SUBJECTS_COUNT);
+	}
+	
+	public static Double logProbabilityX(Integer elementary) {
+		return elementaryLogProbability(elementary, Constants.ALL_SUBJECTS_COUNT);
+	}	
+	
+	public static Double elementaryYProbability(Integer y) {
+		if(y != 0 && y != 1) {
+			throw new RuntimeException("Unknown Y probability!");
 		}
 		
-		return -1*sum;
+		return y == 0 ? 
+				elementaryProbability(48, Constants.ALL_SUBJECTS_COUNT) :
+				elementaryProbability(147, Constants.ALL_SUBJECTS_COUNT);			
 	}
 	
+	public static Double logProbabilityY() {
+		return -(elementaryYProbability(0) + elementaryYProbability(1));
+	}
 	
-	public static Double H(List<Integer> allInterval, List<Integer> healthyInterval) {
-		double sum = 0.0;
-		for (Integer healthyPeopleInInerval : healthyInterval) {
-			for(Integer allPeopleInInterval : allInterval) {
-				sum += intervalProbability(allPeopleInInterval, healthyPeopleInInerval);
-			}
+	public static Double jointProbability(Integer x, Integer y){
+		return elementaryXProbability(x)*elementaryYProbability(y);
+	}
+	
+	public static Double jointLogProbability(Integer x, Integer y) {
+		Double p = jointProbability(x, y);
+		if(p == 0) {
+			return 0.0;
 		}
-		return -1*sum;
+		
+		return p*Math.log(p);
 	}
 	
-	public static Double I(List<Integer> all, List<Integer> healthy) {
-		return H(all) + Constants.H_Y - H(all,healthy);
+	public static Double H(List<Integer> xList) {
+		double sum = 0.0;
+		
+		for(Integer x : xList) {
+			sum += logProbabilityX(x);
+		}
+		
+		return -sum;
 	}
 	
-	/**
-	 * По ходу неправильно
-	 * @param x
-	 * @param y
-	 * @return
-	 */
+	
+	public static Double H(List<Integer> xList, List<Integer> yList) {
+		double sum = 0.0;
+		
+		for(Integer x : xList) {
+			for(Integer y : yList) {
+				sum += jointLogProbability(x, y);
+			}
+		}		
+		
+		return sum;
+	}
+	
+	public static Double I(List<Integer> x, List<Integer> y) {
+		return H(x) + logProbabilityY() - H(x,y);
+	}
+	
 	public static Double V(List<Integer> x, List<Integer> y) {
 		return (1/x.size())*I(x,y);
 	}
