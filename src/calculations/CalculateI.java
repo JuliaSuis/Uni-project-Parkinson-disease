@@ -3,6 +3,7 @@ package calculations;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,7 +18,14 @@ public class CalculateI {
 		Logger.info("=================RESULT==================");
 		List<Double> iValues = CalculateI.calculateI(Paths.get(PATH));
 		Logger.info("Count of results = " + iValues.size());
-		Logger.info(iValues.toString());
+		Logger.info("iValues = " + iValues.toString());
+		
+		Double p = 0.0;
+		for(Double value : iValues) {
+			p += value;
+		}
+		
+		Logger.info("p = " + p);
 		
 	}
 	
@@ -27,7 +35,7 @@ public class CalculateI {
 		List<Double> iValues = new ArrayList<>(dataSize);
 		
 		for(int i = 0; i < dataSize; i++) {
-			iValues.add(Formulas.I(dataFromFile.getAllInFile().get(i), dataFromFile.getHealthyInFile().get(i)));
+			iValues.add(Formulas.I(dataFromFile.getHealthyInFile().get(i), Arrays.asList(0,1)));
 		}
 		return iValues;
 	}
