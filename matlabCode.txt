@@ -1,0 +1,47 @@
+worst=csvread('C:\Users\fear\workspace\JuliaSuis\worst_false_10.csv');
+worst_col1 = worst(:, 1);
+worst_col2 = worst(:, 2);
+best=csvread('C:\Users\fear\workspace\JuliaSuis\best_false_10.csv');
+best_col1 = best(:, 1);
+best_col2 = best(:, 2);
+hold on
+plot(worst_col1, worst_col2)
+plot(best_col1, best_col2)
+title('Graph mutation = false, columns = 10')
+hold off
+figure()
+worst=csvread('C:\Users\fear\workspace\JuliaSuis\worst_false_16.csv');
+worst_col1 = worst(:, 1);
+worst_col2 = worst(:, 2);
+best=csvread('C:\Users\fear\workspace\JuliaSuis\best_false_16.csv');
+best_col1 = best(:, 1);
+best_col2 = best(:, 2);
+hold on
+title('Graph mutation = false, columns = 16')
+plot(worst_col1, worst_col2)
+plot(best_col1, best_col2)
+hold off
+figure()
+worst=csvread('C:\Users\fear\workspace\JuliaSuis\worst_true_10.csv');
+worst_col1 = worst(:, 1);
+worst_col2 = worst(:, 2);
+best=csvread('C:\Users\fear\workspace\JuliaSuis\best_true_10.csv');
+best_col1 = best(:, 1);
+best_col2 = best(:, 2);
+hold on
+title('Graph mutation = true, columns = 10')
+plot(worst_col1, worst_col2)
+plot(best_col1, best_col2)
+hold off
+figure()
+worst=csvread('C:\Users\fear\workspace\JuliaSuis\worst_true_16.csv');
+worst_col1 = worst(:, 1);
+worst_col2 = worst(:, 2);
+best=csvread('C:\Users\fear\workspace\JuliaSuis\best_true_16.csv');
+best_col1 = best(:, 1);
+best_col2 = best(:, 2);
+hold on
+title('Graph mutation = true, columns = 16')
+plot(worst_col1, worst_col2)
+plot(best_col1, best_col2)
+hold off

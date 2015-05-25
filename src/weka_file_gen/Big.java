@@ -40,7 +40,7 @@ public class Big {
 		attributes.addElement(new Attribute("PPE"));
 		
 		List<DoubleHolder> doubles = Parser.parseBig(
-				Paths.get("C:\\Users\\Юля\\Desktop\\Study hard\\Кафедра\\parkinsons_updrs.data").toFile()
+				Paths.get("./data_sets/parkinsons_updrs.data").toFile()
 				);
 		
 		for(DoubleHolder holder : doubles) {
@@ -49,7 +49,7 @@ public class Big {
 		
 		
 		
-		IOUtils.write(data.toString(), new FileOutputStream(Paths.get("C:\\Users\\Юля\\Desktop\\Study hard\\Кафедра\\big.arff").toFile()));
+		IOUtils.write(data.toString(), new FileOutputStream(Paths.get("./big.arff").toFile()));
 		System.out.println("Creation successfull!");
 	}
 }
